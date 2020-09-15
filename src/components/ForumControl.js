@@ -63,7 +63,7 @@ class ForumControl extends React.Component {
     
     return (
       <React.Fragment>
-        <Header homeButton={handleHomeBU}/>
+        <Header onHomeButtonClick={this.handleHomeButtonClick} />
         {currentlyVisibleState}
       </React.Fragment>
       );
