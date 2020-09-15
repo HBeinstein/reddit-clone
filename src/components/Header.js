@@ -1,11 +1,11 @@
 import React from "react";
 
-function Header(){
+function Header(props){
   return(
     <React.Fragment>
       <nav className="navbar navbar-inverse">
         <div className="container-fluid">
-          <a className="navbar-brand" href="#">Working Title</a>
+          <button className="navbar-brand btn" onClick = {props.firstButtonFunc}>{props.firstButtonText}</button>
         </div>
         <form className="navbar-form navbar-right" action="/action!">
           <div className="form-group">
@@ -16,6 +16,11 @@ function Header(){
       </nav>
     </React.Fragment>
   );
+}
+
+Header.Proptypes = {
+  firstButtonFunc: PropTypes.func,
+  firstButtonText: PropTypes.string
 }
 
 export default Header;

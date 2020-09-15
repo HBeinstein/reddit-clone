@@ -6,6 +6,7 @@ import EditPost from "./EditPost";
 import AddCategory from "./AddCategory";
 import BoardList from "./BoardList";
 import PropTypes from "prop-types";
+import Header from "./Header";
 
 class ForumControl extends React.Component {
   constructor(props) {
@@ -32,8 +33,17 @@ class ForumControl extends React.Component {
     this.setState({selectedCategory: selectedCategory});
   }
 
+  handleHomeButtonClick = () => {
+    this.setState({
+      selectedPost: null,
+      selectedCategory: null,
+      editing: false,
+      formVisibleOnPage: false})
+  }
+
   render(){
     let currentlyVisibleState = null;
+    let navBarButtonText = "";
 
     if(this.state.selectedCategory && !this.state.selectedPost){
       currentlyVisibleState = <PostList />
@@ -50,26 +60,10 @@ class ForumControl extends React.Component {
     } else {
       currentlyVisibleState = <BoardList />
     }
-
-    /*
-      Board view -- default else{}
-      Posts of a board view  if(selectedCategory && !selectedPost)
-      New Post Form (selected Post && formVisibleOnPage)
-      Post Detail  if(selectedCategory &&selectedPost)
-      Add Board   if (selectedCategory && FormVisibleONPage)
-
-      edit post (if editing && selectedPost)
-      edit board if(editing && selectedCategory)
-
-      var's
-      slected post
-      selected Category
-      editing
-      formVisibleOnPage
-    */
     
     return (
       <React.Fragment>
+        <Header homeButton={handleHomeBU}/>
         {currentlyVisibleState}
       </React.Fragment>
       );
