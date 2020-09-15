@@ -13,7 +13,8 @@ class ForumControl extends React.Component {
     this.state = {
       selectedPost: null,
       selectedCategory: null,
-      editing: false
+      editing: false,
+      formVisibleOnPage: false
     };
   }
 
@@ -34,15 +35,45 @@ class ForumControl extends React.Component {
   render(){
     let currentlyVisibleState = null;
 
-    if(this.state.selectedPost && this.state.selectedCategory === null){
-      currentlyVisibleState = <
+    if(this.state.selectedCategory && !this.state.selectedPost){
+      currentlyVisibleState = <PostList />
+    } else if(this.state.selectedPost && this.state.formVisibleOnPage){
+      currentlyVisibleState = <NewPostForm />
+    } else if(this.state.selectedCategory && this.state.selectedPost) {
+      currentlyVisibleState = <PostDetail />
+    } else if(this.state.selectedPost && this.state.editing){
+      currentlyVisibleState = <EditPost />
+    } else if(this.state.selectedCategory && this.state.formVisibleOnPage) {
+      currentlyVisibleState = <AddBoard />
+    } else if(this.state.editing && this.state.selectedCategory) {
+      currentlyVisibleState = <EditBoard />
+    } else {
+      currentlyVisibleState = <BoardList />
     }
-  }
 
-  return (
+    /*
+      Board view -- default else{}
+      Posts of a board view  if(selectedCategory && !selectedPost)
+      New Post Form (selected Post && formVisibleOnPage)
+      Post Detail  if(selectedCategory &&selectedPost)
+      Add Board   if (selectedCategory && FormVisibleONPage)
 
-  );
+      edit post (if editing && selectedPost)
+      edit board if(editing && selectedCategory)
+
+      var's
+      slected post
+      selected Category
+      editing
+      formVisibleOnPage
+    */
+    
+    return (
+      <React.Fragment>
+        {currentlyVisibleState}
+      </React.Fragment>
+      );
+    }
 }
-
 
 export default ForumControl;
