@@ -9,7 +9,7 @@ function AddBoard(props) {
     event.preventDefault();
     props.onNewBoardCreation({
       name: event.target.name.value,
-      description: event.target.name.description,
+      description: event.target.description.value,
       id: v4()
     });
   }
