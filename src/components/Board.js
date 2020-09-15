@@ -20,3 +20,5 @@ Ticket.propTypes = {
   whenBoardClicked: PropTypes.func,
   onBoardDeleteBoard: PropTypes.func
 }
+
+export default Board;
