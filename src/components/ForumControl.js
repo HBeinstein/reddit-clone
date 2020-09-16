@@ -23,6 +23,10 @@ class ForumControl extends React.Component {
   handleEditClick = () => {
     this.setState({editing: true});
   }
+  
+  handleEditingBoard = (id) => {
+    const newMasterBoardList = this.state.masterBoardList
+  }
 
   handleChangingSelectedPost = (id) => {
     const selectedPost = this.props.masterPostList[id];
@@ -40,6 +44,11 @@ class ForumControl extends React.Component {
       selectedCategory: null,
       editing: false,
       formVisibleOnPage: false})
+  }
+
+  handleDeleteBoard = (id) => {
+    const newMasterBoardList = this.state.masterBoardList.filter(board => board.id !== id);
+    this.setState({})
   }
 
   render(){

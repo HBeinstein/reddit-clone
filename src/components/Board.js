@@ -8,7 +8,8 @@ function Board(props){
         <h3>{props.name}</h3>
         <p>{props.description}</p>
       </div>
-      <button onClick = {() => props.onBoardDeleteBoard(props.id)}></button>
+      <button onClick = {() => props.onEditBoard(props.id)}>Update Board!</button>
+      <button onClick = {() => props.onBoardDeleteBoard(props.id)}>Delete Board!</button>
     </React.Fragment>
   );
 }
