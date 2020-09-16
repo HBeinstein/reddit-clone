@@ -1,4 +1,4 @@
-import * as c from './actions/ActionTypes.js';
+import * as c from './../actions/ActionTypes';
 
 export default (state = {}, action) => {
   const { title, body, date, upvotes, id } = action;
@@ -38,6 +38,8 @@ export default (state = {}, action) => {
             upvotes: newDownVoteCount,
             id: id
           }
-        })  
+        })
+      default:
+        return state;  
     }
   }

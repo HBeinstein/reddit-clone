@@ -5,6 +5,8 @@ import PropTypes from "prop-types";
 function BoardList(props) {
   return(
     <React.Fragment>
+      <h1>Board List</h1>
+      <hr/>
       {Object.values(props.boardList).map((board) => {
         return <Board
         whenBoardClicked={props.onBoardSelection}

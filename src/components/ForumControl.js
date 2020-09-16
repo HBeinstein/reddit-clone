@@ -1,14 +1,15 @@
 import React from "react";
-import NewPostForm from "./NewPostForm";
-import PostDetail from "./PostDetail";
-import PostList from "./PostList";
-import EditPost from "./EditPost";
+// import NewPostForm from "./NewPostForm";
+// import PostDetail from "./PostDetail";
+// import PostList from "./PostList";
+// import EditPost from "./EditPost";
 import AddBoard from "./AddBoard";
 import BoardList from "./BoardList";
 import PropTypes from "prop-types";
 import Header from "./Header";
 import EditBoard from "./EditBoard";
 import { connect } from "react-redux";
+import * as a from './../actions/index';
 
 class ForumControl extends React.Component {
   constructor(props) {
@@ -28,6 +29,12 @@ class ForumControl extends React.Component {
   handleEditingBoard = (id) => {
     const newMasterBoardList = this.state.masterBoardList
   }
+
+  handleAddingNewBoardToList = (newBoard) => {
+    const { dispatch } = this.props;
+    const action = a.addBoard(newBoard);
+    dispatch(action);
+    } 
 
   handleChangingSelectedPost = (id) => {
     const selectedPost = this.props.masterPostList[id];
@@ -52,24 +59,26 @@ class ForumControl extends React.Component {
     this.setState({})
   }
 
+  // if(this.state.selectedCategory && !this.state.selectedPost){
+    // currentlyVisibleState = <PostList />
+  // } else if(this.state.selectedPost && this.state.formVisibleOnPage){
+  //   currentlyVisibleState = <NewPostForm />
+  // } else if(this.state.selectedCategory && this.state.selectedPost) {
+  //   currentlyVisibleState = <PostDetail />
+  // } else if(this.state.selectedPost && this.state.editing){
+  //   currentlyVisibleState = <EditPost />
+
+
   render(){
     let currentlyVisibleState = null;
     let navBarButtonText = "";
 
-    if(this.state.selectedCategory && !this.state.selectedPost){
-      currentlyVisibleState = <PostList />
-    } else if(this.state.selectedPost && this.state.formVisibleOnPage){
-      currentlyVisibleState = <NewPostForm />
-    } else if(this.state.selectedCategory && this.state.selectedPost) {
-      currentlyVisibleState = <PostDetail />
-    } else if(this.state.selectedPost && this.state.editing){
-      currentlyVisibleState = <EditPost />
-    } else if(this.state.selectedCategory && this.state.formVisibleOnPage) {
+    if(this.state.selectedCategory && this.state.formVisibleOnPage) {
       currentlyVisibleState = <AddBoard />
     } else if(this.state.editing && this.state.selectedCategory) {
       currentlyVisibleState = <EditBoard />
     } else {
-      currentlyVisibleState = <BoardList />
+      currentlyVisibleState = <BoardList boardList = {this.props.masterBoardList}/>
     }
     
     return (
@@ -80,6 +89,7 @@ class ForumControl extends React.Component {
       );
     }
 }
+    
 
 const mapStateToProps = state => {
   return{
