@@ -47,6 +47,11 @@ class ForumControl extends React.Component {
     this.setState({selectedCategory: selectedCategory});
   }
 
+  handleChangingSelectedBoard = (id) => {
+    const selectedBoard = this.props.masterBoardList[id];
+    this.setState({selectedBoard: selectedBoard})
+  }
+
   handleHomeButtonClick = () => {
     this.setState({
       selectedPost: null,
@@ -88,7 +93,7 @@ class ForumControl extends React.Component {
 
 
     if(this.state.componentVisible === "boardList") {
-      currentlyVisibleState = <BoardList boardList = {this.props.masterBoardList}/>
+      currentlyVisibleState = <BoardList boardList = {this.props.masterBoardList} onBoardSelection={this.handleChangingSelectedBoard}/>
       bottomButtonText = 'Add Board';
     } else if(this.state.componentVisible === "editBoard") {
       currentlyVisibleState = <EditBoard />
