@@ -80,4 +80,18 @@ class ForumControl extends React.Component {
     }
 }
 
+const mapStateToProps = state => {
+  return{
+    masterBoardList: state.masterBoardList,
+    masterPostList: state.masterPostList
+  }  
+}
+
+ForumControl.propTypes = {
+  masterBoardList: PropTypes.object,
+  masterPostList: PropTypes.object
+}
+
+ForumControl = connect(mapStateToProps)(ForumControl);
+
 export default ForumControl;
