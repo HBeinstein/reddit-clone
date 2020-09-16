@@ -17,13 +17,13 @@ class ForumControl extends React.Component {
     this.state = {
       selectedPost: null,
       selectedCategory: null,
-      editing: false,
-      formVisibleOnPage: false
+      selectedBoard: null,
+      componentVisible: "boardList"
     };
   }
 
   handleEditClick = () => {
-    this.setState({editing: true});
+    this.setState({componentVisible:"editBoard"})
   }
   
   handleEditingBoard = (id) => {
@@ -34,6 +34,7 @@ class ForumControl extends React.Component {
     const { dispatch } = this.props;
     const action = a.addBoard(newBoard);
     dispatch(action);
+    this.setState({componentVisible:"boardList"})
     } 
 
   handleChangingSelectedPost = (id) => {
@@ -50,13 +51,25 @@ class ForumControl extends React.Component {
     this.setState({
       selectedPost: null,
       selectedCategory: null,
-      editing: false,
-      formVisibleOnPage: false})
+      componentVisible: "boardList"})
   }
 
   handleDeleteBoard = (id) => {
     const newMasterBoardList = this.state.masterBoardList.filter(board => board.id !== id);
     this.setState({})
+  }
+
+  handleAddingNewBoardOnClick = () => {
+    if (this.state.componentVisible === "boardList")
+    {
+      this.setState({
+        componentVisible: "addBoard"
+      });
+    } else {
+      this.setState({
+        componentVisible: "boardList"
+      });
+    }
   }
 
   // if(this.state.selectedCategory && !this.state.selectedPost){
@@ -71,25 +84,27 @@ class ForumControl extends React.Component {
 
   render(){
     let currentlyVisibleState = null;
-    let navBarButtonText = "";
+    let bottomButtonText = "Board List";
 
-    if(this.state.selectedCategory && this.state.formVisibleOnPage) {
-      currentlyVisibleState = <AddBoard />
-    } else if(this.state.editing && this.state.selectedCategory) {
+
+    if(this.state.componentVisible === "boardList") {
+      currentlyVisibleState = <BoardList boardList = {this.props.masterBoardList}/>
+      bottomButtonText = 'Add Board';
+    } else if(this.state.componentVisible === "editBoard") {
       currentlyVisibleState = <EditBoard />
     } else {
-      currentlyVisibleState = <BoardList boardList = {this.props.masterBoardList}/>
+      currentlyVisibleState = <AddBoard onNewBoardCreation={this.handleAddingNewBoardToList}/> 
     }
     
     return (
       <React.Fragment>
         <Header onHomeButtonClick={this.handleHomeButtonClick} />
         {currentlyVisibleState}
+        <button onClick={this.handleAddingNewBoardOnClick}>{bottomButtonText}</button>
       </React.Fragment>
       );
     }
 }
-    
 
 const mapStateToProps = state => {
   return{
