@@ -13,7 +13,7 @@ function Board(props){
   );
 }
 
-Ticket.propTypes = {
+Board.propTypes = {
   name: PropTypes.string,
   description: PropTypes.string,
   id: PropTypes.string,

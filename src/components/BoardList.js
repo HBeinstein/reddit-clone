@@ -21,3 +21,5 @@ function BoardList(props) {
 BoardList.propTypes = {
   boardList: PropTypes.object
 }
+
+export default BoardList;

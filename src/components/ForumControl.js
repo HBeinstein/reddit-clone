@@ -7,6 +7,7 @@ import AddBoard from "./AddBoard";
 import BoardList from "./BoardList";
 import PropTypes from "prop-types";
 import Header from "./Header";
+import EditBoard from "./EditBoard";
 
 class ForumControl extends React.Component {
   constructor(props) {

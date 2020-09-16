@@ -1,21 +1,21 @@
 import React from 'react';
-import { v4 } from 'uuid';
 import PropTypes from 'prop-types';
 
-function AddBoard(props) {
+function EditBoard(props) {
+  const { board } = props;
 
-  function handleNewBoardFormSubmission(event) {
+  function handleEditBoardFormSubmission(event) {
     event.preventDefault();
-    props.onNewBoardCreation({
+    props.onEditBoard({
       name: event.target.name.value,
       description: event.target.description.value,
-      id: v4()
+      id: board.id
     });
   }
 
   return(
     <React.Fragment>
-      <form onSubmit={handleNewBoardFormSubmission}>
+      <form onSubmit={handleEditBoardFormSubmission}>
         <input
           type='text'
           name='name'
@@ -24,14 +24,14 @@ function AddBoard(props) {
           type='text'
           name='description'
           placeholder='Board Description' />
-        <button type='submit' className='btn btn-info'>Create Board!</button>
+        <button type='submit' className='btn btn-info'>Update Board!</button>
       </form>
     </React.Fragment>
   );
 }
 
-AddBoard.propTypes = {
-  onNewBoardCreation: PropTypes.func
+EditBoard.propTypes = {
+  onEditBoard: PropTypes.func
 }
 
-export default AddBoard;
+export default EditBoard;
