@@ -1,9 +1,6 @@
-// CREATE - 'ADD_Board'
-//READ - get state from store
-// Update - 'ADD_BOARD' 
-// DELETE - 'DELETE_BOARD
+import * as c from './actions/ActionTypes.js';
 
-export default (state = {}) => {
+export default (state = {}, action) => {
   const { name, description, id } = action;
   if (action.type === c.ADD_BOARD){
     return Object.assign({}, state, {
